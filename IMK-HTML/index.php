@@ -1,0 +1,1 @@
+<p>Hello World. Hari ini <?php echo date("d/m/Y");?></p>
