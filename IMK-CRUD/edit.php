@@ -1,4 +1,45 @@
+<?php
+  //koneksi database
 
+  $server = "localhost";
+  $user = "root";
+  $pass = "";
+  $database = "mahasiswa";
+  
+  $koneksi = mysqli_connect($server, $user, $pass, $database)or die(mysqli_error($koneksi));
+
+  if(isset($_POST['bubah']))
+  {
+      $npm = $_POST["npm"];
+      $nama = $_POST["nama"];
+      $email = $_POST["email"];
+      $alamat = $_POST["alamat"];
+      $jurusan = $_POST["jurusan"];
+      $fakultas = $_POST["fakultas"];
+      $agama = $_POST["agama"];
+      $no_tlp = $_POST["no_tlp"];
+  
+      $query = mysqli_query($koneksi, "UPDATE mhs SET
+          nama='$nama',
+          email='$email',
+          alamat='$alamat',
+          jurusan='$jurusan',
+          fakultas='$fakultas',
+          agama='$agama',
+          no_tlp='$no_tlp'
+          WHERE npm='$npm'");
+  
+      echo "<script>
+              alert('data berhasil diubah!');
+              document.location.href = 'index.php';
+            </script>";
+  }
+
+  $npm = $_GET["npm"];
+  $mhs = mysqli_query($koneksi, "SELECT * FROM mhs WHERE npm = '$npm'");
+  $result = mysqli_fetch_array($mhs);
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
